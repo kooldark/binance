@@ -1042,20 +1042,13 @@ function calc() {
 <div class="direction">${dirBadge}</div>
 <div class="res-grid">
   <div class="res-item entry"><div class="res-item-label">Entry</div><div class="res-item-value">${e.toFixed(4)}</div></div>
-  <div class="res-item"><div class="res-item-label">Leverage</div><div class="res-item-value">${lev}x</div></div>
-  <div class="res-item position-value"><div class="res-item-label">Position Value</div><div class="res-item-value">$${val.toFixed(2)}</div></div>`;
-
-  if(tp > 0 && !tpError) {
-    html += `
-  <div class="res-item take-profit"><div class="res-item-label">Take Profit</div><div class="res-item-value">${tp.toFixed(4)}</div></div>`;
-  }
-
-  html += `
   <div class="res-item sl"><div class="res-item-label">Stop Loss</div><div class="res-item-value">${sl.toFixed(4)}</div></div>
   <div class="res-item risk"><div class="res-item-label">Risk Amount</div><div class="res-item-value">-$${ra.toFixed(2)}</div></div>
+  <div class="res-item position-value"><div class="res-item-label">Position Value</div><div class="res-item-value">$${val.toFixed(2)}</div></div>
   <div class="res-item margin-used"><div class="res-item-label">Margin Used</div><div class="res-item-value">$${margin.toFixed(2)}</div></div>
+  <div class="res-item"><div class="res-item-label">SL Distance</div><div class="res-item-value">${percentSlEntry.toFixed(2)}%</div></div>
   <div class="res-item risk-margin ${isHighRisk ? 'danger' : ''}"><div class="res-item-label">Risk / Margin</div><div class="res-item-value">${percentSlMargin.toFixed(2)}%</div></div>
-  <div class="res-item"><div class="res-item-label">SL Distance</div><div class="res-item-value">${percentSlEntry.toFixed(2)}%</div></div>`;
+  <div class="res-item"><div class="res-item-label">Contract Size</div><div class="res-item-value">${size.toFixed(4)}</div></div>`;
 
   if(tpError) {
     html += `<div class="res-item" style="grid-column:1/-1;background:rgba(246,70,93,0.12);border-left-color:var(--red);color:var(--red);border-left:2px solid;">${tpError}</div>`;
@@ -1065,6 +1058,7 @@ function calc() {
     const rrClass = rrBad ? 'rr-bad' : 'rr-good';
     const percentTpEntry = (Math.abs(tp - e) / e) * 100;
     html += `
+  <div class="res-item take-profit"><div class="res-item-label">Take Profit</div><div class="res-item-value">${tp.toFixed(4)}</div></div>
   <div class="res-item success"><div class="res-item-label">TP Distance</div><div class="res-item-value">${percentTpEntry.toFixed(2)}%</div></div>
   <div class="${rrClass}">R:R Ratio 1:${rrRatio} ${rrBad ? '⚠️' : '✓'}</div>
   <div class="res-item success"><div class="res-item-label">Max Profit</div><div class="res-item-value">+$${maxGain.toFixed(2)}</div></div>
