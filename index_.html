@@ -188,16 +188,6 @@ input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(24
             <input type="range" id="lev" min="1" max="125" value="10">
             <div class="lev-val" id="levVal">10x</div>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;">
-            <button class="toggle-btn" data-lev="5">5x</button>
-            <button class="toggle-btn" data-lev="10">10x</button>
-            <button class="toggle-btn" data-lev="20">20x</button>
-            <button class="toggle-btn" data-lev="30">30x</button>
-            <button class="toggle-btn" data-lev="40">40x</button>
-            <button class="toggle-btn" data-lev="50">50x</button>
-            <button class="toggle-btn" data-lev="100">100x</button>
-            <button class="toggle-btn" data-lev="125">125x</button>
-          </div>
         </div>
         <button class="btn btn-primary" style="margin-top:12px" onclick="calc()">Calculate</button>
       </div>
@@ -299,16 +289,6 @@ document.getElementById('lev').oninput = e=>{
   els.levVal().textContent = e.target.value+'x'; 
   save(); calc(); 
 };
-
-document.querySelectorAll('button[data-lev]').forEach(btn => {
-  btn.onclick = e => {
-    const leverage = e.currentTarget.dataset.lev;
-    els.lev().value = leverage;
-    els.levVal().textContent = leverage + 'x';
-    save();
-    calc();
-  };
-});
 
 document.getElementById('applyRR').onclick = ()=>{ 
   const v = parseFloat(document.getElementById('customRR').value); 
