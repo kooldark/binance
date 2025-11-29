@@ -2,604 +2,188 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Fast Position Calc Pro</title>
+<title>Fast PosCalc Pro</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{font-family:-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-body{background:#0d0d0d;color:#eee;line-height:1.4;min-height:100vh;padding:12px 8px}
-
-:root{
-  --bg:#0d0d0d;--card:#1a1a1a;--border:#333;
-  --accent:#f0b90b;--green:#00d4aa;--red:#ff4466;
-  --radius:12px;--gap:12px;
-}
-
-/* Layout chính */
-.container{
-  max-width:1400px;
-  margin:0 auto;
-  display:grid;
-  gap:var(--gap);
-  grid-template-columns:1fr;
-  min-height:100vh;
-}
-
-/* Tablet & Desktop: 2 cột */
-@media (min-width:768px){
-  .container{
-    grid-template-columns:460px 1fr;
-    align-items:start;
-  }
-  .calc-sidebar{
-    position:sticky;
-    top:12px;
-    max-height:calc(100vh - 24px);
-    overflow-y:auto;
-    padding-right:8px;
-  }
-  .main-content{
-    display:flex;
-    flex-direction:column;
-    gap:var(--gap);
-  }
-}
-
-/* Card chung */
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:18px;
-  overflow:hidden;
-}
-
-/* Tiêu đề */
-h2{
-  font-size:15px;
-  font-weight:700;
-  color:var(--accent);
-  margin-bottom:14px;
-  padding-bottom:8px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-/* ==================== FLOATING LABEL ==================== */
-.input-group {
-  position: relative;
-  margin-bottom: 11px;
-}
-
-.input-group input {
-  width: 100%;
-  background: #111;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 16px 12px 8px 12px; /* trên nhiều hơn để label nổi lên */
-  font-size: 15px;
-  transition: all 0.2s;
-}
-
-.input-group input::placeholder {
-  opacity: 0;
-  transition: inherit;
-}
-
-.input-group label {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  color: #aaa;
-  font-size: 13px;
-  font-weight: 500;
-  pointer-events: none;
-  transition: all 0.2s ease;
-  background: #111;
-  padding: 0 4px;
-  transform-origin: left center;
-}
-
-.input-group input:focus,
-.input-group input:not(:placeholder-shown) {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(240,185,11,.2);
-  outline: none;
-}
-
-.input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-  top: 10px;
-  font-size: 11px;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* Toggle buttons */
-.toggle{
-  display:flex;
-  background:#111;
-  border:1px solid #444;
-  border-radius:8px;
-  overflow:hidden;
-  margin-bottom:10px;
-}
-.toggle button{
-  flex:1;
-  padding:9px 6px;
-  background:transparent;
-  color:#aaa;
-  font-weight:600;
-  font-size:12px;
-  border:none;
-  cursor:pointer;
-}
-.toggle button.active{
-  background:var(--accent);
-  color:#000;
-}
-
-/* Leverage */
-.lev-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:10px;
-  flex-wrap:wrap;
-}
-.lev-presets{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-top:6px;
-}
-.lev-preset{
-  padding:6px 11px;
-  background:#222;
-  border:1px solid #444;
-  border-radius:6px;
-  font-size:12px;
-  cursor:pointer;
-  transition:all .2s;
-}
-.lev-preset:hover{background:#333}
-.lev-preset.active{
-  background:var(--accent);
-  color:#000;
-  font-weight:700;
-}
-.lev-val{
-  background:var(--accent);
-  color:#000;
-  padding:6px 12px;
-  border-radius:6px;
-  font-weight:800;
-  font-size:14px;
-  min-width:56px;
-  text-align:center;
-}
-
-/* Button */
-.btn-full{
-  width:50%;
-  padding:12px;
-  background:var(--accent);
-  color:#000;
-  border:none;
-  border-radius:8px;
-  font-weight:600;
-  font-size:14px;
-  margin-top:8px;
-  cursor:pointer;
-  transition:filter .2s;
-}
-.btn-full:hover{filter:brightness(1.15)}
+body{background:#0d0d0d;color:#eee;font-family:-apple-system,system-ui,sans-serif;line-height:1.4;min-height:100vh;padding:6px 4px}
+:root{--c:#1a1a1a;--b:#333;--a:#f0b90b;--g:#00d4aa;--r:#ff4466;--rad:14px}
+.container{max-width:1400px;margin:0 auto;display:grid;gap:7px;grid-template-columns:1fr}
+@media(min-width:768px){.container{grid-template-columns:420px 1fr;align-items:start}}
+.card{background:var(--c);border:1px solid var(--b);border-radius:var(--rad);padding:12px 13px;overflow:hidden;font-size:14.5px}
+h2{font-size:14px;font-weight:700;color:var(--a);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--b);display:flex;justify-content:space-between}
+.input-group{position:relative;margin:7px 0}
+.input-group input{width:100%;background:#111;color:#fff;border:1px solid #444;border-radius:8px;padding:13px 9px 6px;font-size:14.5px}
+.input-group label{position:absolute;top:50%;left:9px;transform:translateY(-50%);color:#aaa;font-size:12.5px;pointer-events:none;background:#111;padding:0 4px;transition:.2s}
+.input-group input:focus,.input-group input:not(:placeholder-shown){border-color:var(--a)}
+.input-group input:focus+label,.input-group input:not(:placeholder-shown)+label{top:7px;font-size:10.5px;color:var(--a);font-weight:600}
+.toggle{display:flex;background:#111;border:1px solid #444;border-radius:8px;overflow:hidden;margin:6px 0}
+.toggle button{flex:1;padding:7px 4px;font-size:11.5px;font-weight:600;color:#aaa;background:transparent;border:none;cursor:pointer}
+.toggle button.active{background:var(--a);color:#000}
+.lev-row{display:flex;gap:8px;align-items:center;margin:6px 0}
+.lev-presets{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.lev-preset{padding:4px 9px;background:#222;border:1px solid #444;border-radius:6px;font-size:11.5px;cursor:pointer}
+.lev-preset.active{background:var(--a);color:#000;font-weight:700}
+.lev-val{background:var(--a);color:#000;padding:4px 10px;border-radius:6px;font-weight:800;font-size:13px;min-width:48px;text-align:center}
+.btn{display:inline-block;width:48%;padding:9px;background:var(--a);color:#000;border:none;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer}
+.btn:hover{filter:brightness(1.15)}
 .btn-gray{background:#333;color:#fff}
 .btn-danger{background:#660022;color:#fff}
 
-/* Kết quả realtime */
+/* RESULT - SIÊU GỌN */
 .result-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:12px;
-  margin:18px 0 8px;
-  padding-top:14px;
-  border-top:1px solid var(--border);
+  grid-template-columns:repeat(auto-fit,minmax(92px,1fr));
+  gap:5px;
+  margin:8px -6px 0;
+  padding:8px 6px 2px;
+  border-top:1px solid var(--b);
 }
 .res-item{
   background:#111;
-  padding:12px 14px;
-  border-radius:8px;
-  border-left:4px solid var(--accent);
+  padding:7px 8px;
+  border-radius:11px;
+  border-left:4px solid var(--a);
+  text-align:center;
 }
-.res-item.long{border-left-color:var(--green)}
-.res-item.short{border-left-color:var(--red)}
-.res-item-label{
-  font-size:11px;
-  color:#888;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
+.res-item.long{border-left-color:var(--g)}
+.res-item.short{border-left-color:var(--r)}
+.res-item-label{font-size:8.8px;color:#888;text-transform:uppercase;letter-spacing:0.7px;font-weight:600}
 .res-item-value{
-  font-weight:700;
-  font-size:16px;
-  margin-top:4px;
+  font-weight:800;
+  font-size:13.8px;
+  margin-top:1px;
+  color:#ffffff !important;   /* TẤT CẢ CHỮ SỐ MÀU TRẮNG */
 }
-.risk-high{color:var(--red)!important}
 
-/* Saved positions */
-.saved-list{
-  margin-top:12px;
-  max-height:65vh;
-  overflow-y:auto;
-  padding-right:4px;
+/* NỔI BẬT POSITION VALUE & MARGIN */
+.highlight{
+  background:linear-gradient(135deg,#222,#111);
+  border:2px solid var(--a)!important;
+  box-shadow:0 4px 18px rgba(240,185,11,.5);
+  transform:scale(1.05);
 }
-.saved-item{
-  background:#111;
-  border:1px solid #333;
-  border-radius:8px;
-  padding:12px;
-  margin-bottom:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
+.highlight .res-item-value{
+  font-size:17px!important;
+  font-weight:900!important;
+  color:var(--a)!important;
 }
-.saved-name{
-  font-weight:700;
-  color:var(--accent);
-  font-size:14px;
-}
-.saved-info{
-  font-size:12px;
-  color:#aaa;
-}
-.saved-actions button{
-  background:transparent;
-  color:#888;
-  border:none;
-  cursor:pointer;
-  font-size:20px;
-  padding:4px 8px;
-}
-.saved-actions button:hover{color:#fff}
 
-.badge{
-  font-size:12px;
-  padding:4px 10px;
-  border-radius:6px;
-  font-weight:700;
-  text-transform:uppercase;
+/* CẢNH BÁO ĐỎ KHI RISK/MARGIN > 90% */
+.risk-high .res-item-value{
+  color:#ff3366 !important;
+  font-weight:900 !important;
+  animation:blink 1.2s infinite;
 }
-.long-bg{background:#004d40;color:var(--green)}
-.short-bg{background:#660022;color:var(--red)}
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:0.6}
+}
+
+/* Mobile tối ưu */
+@media(max-width:480px){
+  .result-grid{grid-template-columns:repeat(3,1fr);gap:4px;padding:7px 4px}
+  .res-item{padding:6px 5px}
+  .highlight .res-item-value{font-size:15px!important}
+}
+.saved-list{max-height:48vh;overflow-y:auto;margin-top:6px}
+.saved-item{background:#111;border:1px solid #333;border-radius:9px;padding:9px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+.saved-name{font-weight:700;color:var(--a)}
+.saved-actions button{background:transparent;color:#888;border:none;cursor:pointer;font-size:18px}
+.badge{font-size:10px;padding:3px 8px;border-radius:6px;font-weight:700}
+.long-bg{background:#004d40;color:var(--g)}
+.short-bg{background:#660022;color:var(--r)}
 </style>
 </head>
 <body>
-
 <div class="container">
-
-  <!-- CỘT TRÁI: Calculator (sticky) -->
   <div class="calc-sidebar">
     <div class="card">
-      <h2>Position Calculator <span id="directionBadge" class="badge">-</span></h2>
-      
-      <!-- Balance + Risk (2 cột) -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px;">
-        <!-- Balance -->
-        <div class="input-group">
-          <input type="number" id="acc" value="1000" placeholder=" " required>
-          <label>Balance</label>
-        </div>
-        
-        <!-- Risk %/$ -->
-        <div style="display:flex;gap:8px;align-items:end;">
-          <div class="input-group" style="flex:1;">
-            <input type="number" id="rp" placeholder=" " value="1" step="0.1" required>
-            <input type="number" id="ra" placeholder=" " value="15" style="display:none;" required>
-            <label>Risk</label>
-          </div>
-          <div class="toggle" data-group="risk">
-            <button class="active" data-mode="p">%</button>
-            <button data-mode="a">$</button>
-          </div>
+      <h2>Position Calc <span id="directionBadge" class="badge">-</span></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+        <div class="input-group"><input type="number" id="acc" value="1000" placeholder=" "><label>Balance</label></div>
+        <div style="display:flex;gap:6px;align-items:end">
+          <div class="input-group" style="flex:1"><input type="number" id="rp" value="1" step="0.1" placeholder=" "><input type="number" id="ra" value="15" style="display:none"><label>Risk</label></div>
+          <div class="toggle" data-group="risk"><button class="active" data-mode="p">%</button><button data-mode="a">$</button></div>
         </div>
       </div>
-      
-      <!-- Entry + Stop Loss (2 cột) -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px;">
-        <div class="input-group">
-          <input type="number" id="e" placeholder=" " step="any">
-          <label>Entry</label>
-        </div>
-        <div class="input-group">
-          <input type="number" id="sp" placeholder=" " step="any">
-          <label>Stop Loss</label>
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 0">
+        <div class="input-group"><input type="number" id="e" placeholder=" " step="any"><label>Entry</label></div>
+        <div class="input-group"><input type="number" id="sp" placeholder=" " step="any"><label>Stop Loss</label></div>
       </div>
-      
-      <!-- Take Profit -->
-      <div style="display:flex;gap:8px;align-items:end;margin-bottom:11px;">
-        <div class="toggle" data-group="tp" style="flex:none;">
-          <button class="active" data-mode="rr">R:R</button>
-          <button data-mode="price">Price</button>
-        </div>
-        <div class="input-group" style="flex:1;">
-          <input type="number" id="tpInput" placeholder=" " value="2" step="any">
-          <label id="tpLabel">R:R</label>
-        </div>
+      <div style="display:flex;gap:6px;align-items:end;margin:7px 0">
+        <div class="toggle" data-group="tp"><button class="active" data-mode="rr">R:R</button><button data-mode="price">Price</button></div>
+        <div class="input-group" style="flex:1"><input type="number" id="tpInput" value="2" step="any" placeholder=" "><label id="tpLabel">R:R</label></div>
       </div>
-      
-      <!-- Leverage -->
-      <div style="margin-bottom:10px;">
-        <div class="lev-row">
-          <input type="range" id="lev" min="1" max="125" value="20" style="flex:1">
-          <div class="lev-val" id="levVal">20x</div>
-        </div>
+      <div style="margin:6px 0">
+        <div class="lev-row"><input type="range" id="lev" min="1" max="150" value="20" style="flex:1"><div class="lev-val" id="levVal">20x</div></div>
         <div class="lev-presets">
-          <div class="lev-preset" data-lev="5">5x</div>
-          <div class="lev-preset" data-lev="10">10x</div>
-          <div class="lev-preset active" data-lev="20">20x</div>
-          <div class="lev-preset" data-lev="30">30x</div>
-          <div class="lev-preset" data-lev="40">40x</div>
-          <div class="lev-preset" data-lev="50">50x</div>
+          <div class="lev-preset" data-lev="5">5x</div><div class="lev-preset" data-lev="10">10x</div><div class="lev-preset active" data-lev="20">20x</div>
+          <div class="lev-preset" data-lev="50">50x</div><div class="lev-preset" data-lev="100">100x</div><div class="lev-preset" data-lev="150">150x</div>
         </div>
       </div>
-
-      <div class="action-row" style="display:flex;gap:10px;margin-top:16px;">
-        <button class="btn-full" onclick="savePosition()">SAVE POSITION</button>
-        <button class="btn-full btn-gray" onclick="clearForm()">CLEAR</button>
+      <div style="display:flex;gap:7px;margin-top:10px">
+        <button class="btn" onclick="savePosition()">SAVE</button>
+        <button class="btn btn-gray" onclick="clearForm()">CLEAR</button>
       </div>
     </div>
   </div>
 
-  <!-- CỘT PHẢI: Kết quả + Saved Positions -->
   <div class="main-content">
-
-    <!-- Kết quả realtime -->
+    <div class="card"><div id="liveResult" style="text-align:center;padding:30px;color:#555;font-size:14px">Nhập Entry + SL</div></div>
     <div class="card">
-      <div id="liveResult">
-        <div style="text-align:center;padding:60px;color:#555;font-size:15px">
-          Nhập Entry + Stop Loss để tính toán
-        </div>
-      </div>
-    </div>
-
-    <!-- Saved Positions -->
-    <div class="card">
-      <h2>Saved Positions <span id="savedCount">0</span></h2>
-      <div id="savedList" class="saved-list">
-        <div style="text-align:center;padding:40px;color:#555">Chưa có vị thế nào được lưu</div>
-      </div>
-      <button class="btn-full btn-danger" 
-        onclick="if(confirm('Xóa tất cả vị thế đã lưu?')){localStorage.removeItem('savedPositions');loadSavedPositions();}">
-        CLEAR ALL POSITIONS
-      </button>
+      <h2>Saved <span id="savedCount">0</span></h2>
+      <div id="savedList" class="saved-list"><div style="text-align:center;padding:20px;color:#555">Chưa có vị thế</div></div>
+      <button class="btn btn-danger" style="width:100%;margin-top:6px" onclick="if(confirm('Xóa tất cả?')){localStorage.removeItem('savedPositions');loadSavedPositions()}">CLEAR ALL</button>
     </div>
   </div>
-
 </div>
+
 <script>
-let riskMode = 'p', tpMode = 'rr';
-const $ = id => document.getElementById(id);
+let riskMode='p',tpMode='rr';const $=id=>document.getElementById(id);
+function f(n,d=6){return parseFloat(Number(n).toFixed(d))}
+function saveState(){localStorage.setItem('s',JSON.stringify({acc:$('acc').value,riskMode,rp:$('rp').value,ra:$('ra').value,e:$('e').value,sp:$('sp').value,tpMode,tpInput:$('tpInput').value,lev:$('lev').value}))}
+function loadState(){try{const s=JSON.parse(localStorage.getItem('s')||'');if(!s)return;$('acc').value=s.acc||1000;riskMode=s.riskMode||'p';$('rp').value=s.rp||1;$('ra').value=s.ra||15;$('e').value=s.e||'';$('sp').value=s.sp||'';tpMode=s.tpMode||'rr';$('tpInput').value=s.tpInput||2;$('lev').value=s.lev||20;updateToggles();$('levVal').textContent=(s.lev||20)+'x';document.querySelectorAll('.lev-preset').forEach(b=>b.classList.toggle('active',b.dataset.lev==(s.lev||20)));calc()}catch(e){}}
+function name(){const e=+$( 'e').value||0,s=+$( 'sp').value||0;if(!e||!s)return"Pos";return`BTC ${s<e?'LONG':'SHORT'} ${e>=1000?Math.round(e):e.toFixed(1)}`}
+function updateToggles(){document.querySelectorAll('.toggle').forEach(t=>{const m=t.dataset.group==='risk'?riskMode:tpMode;t.querySelectorAll('button').forEach(b=>b.className=b.dataset.mode===m?'active':'')});$('rp').style.display=riskMode==='p'?'block':'none';$('ra').style.display=riskMode==='a'?'block':'none';$('tpLabel').textContent=tpMode==='rr'?'R:R':'TP'}
+document.querySelectorAll('.toggle button').forEach(b=>b.onclick=()=>{const g=b.closest('.toggle').dataset.group;if(g==='risk')riskMode=b.dataset.mode;else tpMode=b.dataset.mode;updateToggles();calc();saveState()})
+document.querySelectorAll('.lev-preset').forEach(b=>b.onclick=()=>{const v=b.dataset.lev;$('lev').value=v;$('levVal').textContent=v+'x';document.querySelectorAll('.lev-preset').forEach(x=>x.classList.toggle('active',x.dataset.lev==v));calc();saveState()})
+$('lev').oninput=e=>{const v=e.target.value;$('levVal').textContent=v+'x';document.querySelectorAll('.lev-preset').forEach(x=>x.classList.toggle('active',x.dataset.lev==v));calc();saveState()}
 
-// Format số thông minh: bỏ .000000 nếu là số nguyên hoặc số thập phân thừa 0
-function smartFormat(num, decimals = 6) {
-  if (isNaN(num)) return num;
-  const fixed = Number(num).toFixed(decimals);
-  return parseFloat(fixed); // tự động bỏ các số 0 thừa ở cuối và dấu chấm nếu là số nguyên
-}
-
-// === Lưu trạng thái lần sử dụng cuối ===
-function saveCurrentState() {
-  const state = {
-    acc: $('acc').value,
-    riskMode, rp: $('rp').value, ra: $('ra').value,
-    e: $('e').value, sp: $('sp').value,
-    tpMode, tpInput: $('tpInput').value,
-    lev: $('lev').value
-  };
-  localStorage.setItem('lastCalcState', JSON.stringify(state));
-}
-
-function loadLastState() {
-  try {
-    const saved = localStorage.getItem('lastCalcState');
-    if (!saved) return false;
-    const s = JSON.parse(saved);
-
-    $('acc').value = s.acc || '1000';
-    riskMode = s.riskMode || 'p';
-    $('rp').value = s.rp || '1';
-    $('ra').value = s.ra || '15';
-    $('e').value = s.e || '';
-    $('sp').value = s.sp || '';
-    tpMode = s.tpMode || 'rr';
-    $('tpInput').value = s.tpInput || '2';
-    $('lev').value = s.lev || '20';
-
-    updateToggles();
-    $('levVal').textContent = (s.lev || '20') + 'x';
-    document.querySelectorAll('.lev-preset').forEach(b => 
-      b.classList.toggle('active', b.dataset.lev == (s.lev || '20'))
-    );
-    calc();
-    return true;
-  } catch(e) { return false; }
-}
-
-// Tạo tên vị thế
-function generatePositionName() {
-  const entry = parseFloat($('e').value) || 0;
-  const sl = parseFloat($('sp').value) || 0;
-  if (!entry || !sl || entry === sl) return "New Position";
-  const isLong = sl < entry;
-  const symbol = 'BTC';
-  const rounded = entry >= 1000 ? Math.round(entry) : entry.toFixed(1);
-  return `${symbol} ${isLong?'LONG':'SHORT'} ${rounded}`;
-}
-
-// Toggle & Leverage & TP Label
-function updateToggles(){
-  document.querySelectorAll('.toggle').forEach(t => {
-    const mode = t.dataset.group === 'risk' ? riskMode : tpMode;
-    t.querySelectorAll('button').forEach(b => b.className = b.dataset.mode === mode ? 'active' : '');
-  });
-  $('rp').style.display = riskMode==='p'?'block':'none';
-  $('ra').style.display = riskMode==='a'?'block':'none';
-  
-  const tpLabel = $('tpLabel');
-  if (tpLabel) {
-    tpLabel.textContent = tpMode === 'rr' ? 'R:R' : 'Take Profit';
-  }
-}
-
-document.querySelectorAll('.toggle button').forEach(b=>b.addEventListener('click', ()=>{
-  const g = b.closest('.toggle').dataset.group;
-  if(g==='risk') riskMode = b.dataset.mode;
-  if(g==='tp') tpMode = b.dataset.mode;
-  updateToggles(); calc(); saveCurrentState();
-}));
-
-document.querySelectorAll('.lev-preset').forEach(b=>b.onclick=()=>{
-  const v = b.dataset.lev;
-  $('lev').value = v; $('levVal').textContent = v+'x';
-  document.querySelectorAll('.lev-preset').forEach(x=>x.classList.toggle('active', x.dataset.lev==v));
-  calc(); saveCurrentState();
-});
-
-$('lev').oninput = e => {
-  const v = e.target.value;
-  $('levVal').textContent = v+'x';
-  document.querySelectorAll('.lev-preset').forEach(x=>x.classList.toggle('active', x.dataset.lev==v));
-  calc(); saveCurrentState();
-};
-
-// Tính toán chính (đã cải thiện format + thêm Leverage)
 function calc(){
-  const acc = +$('acc').value || 0;
-  const entry = +$('e').value || 0;
-  const sl = +$('sp').value || 0;
-  const lev = +$('lev').value || 1;
-  const tpVal = +$('tpInput').value || 0;
-
-  if(!acc || !entry || !sl || entry===sl){
-    $('liveResult').innerHTML = '<div style="text-align:center;padding:60px;color:#555;font-size:15px">Nhập Entry + Stop Loss để tính toán</div>';
-    $('directionBadge').textContent = '-'; $('directionBadge').className = 'badge';
-    return;
-  }
-
-  const riskAmt = riskMode==='p' ? acc*(+$('rp').value||0)/100 : (+$('ra').value||0);
-  if(riskAmt<=0){ $('liveResult').innerHTML='<div style="color:#f44;text-align:center;padding:20px">Risk phải > 0</div>'; return; }
-
-  const isLong = sl < entry;
-  const distance = Math.abs(entry - sl);
-  const size = riskAmt / distance;
-  const posValue = size * entry;
-  const margin = posValue / lev;
-  const liq = isLong ? entry - (margin/size) : entry + (margin/size);
-
-  let tp=0, rr=0;
-  if(tpMode!=='none' && tpVal>0){
-    if(tpMode==='rr'){ rr=tpVal; tp=isLong?entry+distance*rr:entry-distance*rr; }
-    else{ tp=tpVal; const profit=isLong?(tp-entry)*size:(entry-tp)*size; rr=profit>0?(profit/riskAmt).toFixed(2):0; }
-  }
-
-  const riskPct = margin ? (riskAmt/margin*100).toFixed(1) : 0;
-  const riskStyle = riskPct>90 ? 'risk-high' : '';
-
-  $('directionBadge').className = 'badge '+(isLong?'long-bg':'short-bg');
-  $('directionBadge').textContent = isLong?'LONG ↑':'SHORT ↓';
-
-  $('liveResult').innerHTML = `
+  const a=+$( 'acc').value||0,e=+$( 'e').value||0,sp=+$( 'sp').value||0,l=+$( 'lev').value||1,t=+$( 'tpInput').value||0;
+  if(!a||!e||!sp||e===sp){$('liveResult').innerHTML='<div style="text-align:center;padding:30px;color:#555;font-size:14px">Nhập Entry + SL</div>';$('directionBadge').textContent='-';return}
+  const r=riskMode==='p'?a*(+$( 'rp').value||0)/100:(+$( 'ra').value||0);if(r<=0)return void($('liveResult').innerHTML='<div style="color:#f44;padding:15px">Risk > 0</div>');
+  const long=sp<e,d=Math.abs(e-sp),sz=r/d,pv=sz*e,m=pv/l,liq=long?e-(m/sz):e+(m/sz);
+  let tp=0,rr=0;
+  if(t>0){if(tpMode==='rr'){rr=t;tp=long?e+d*rr:e-d*rr}else{tp=t;rr=((long?(tp-e):(e-tp))*sz/r).toFixed(2)}}
+  const pct=m?(r/m*100).toFixed(1):0;
+  const isHighRisk = pct >= 90;
+  $('directionBadge').className='badge '+(long?'long-bg':'short-bg');$('directionBadge').textContent=long?'LONG':'SHORT';
+  $('liveResult').innerHTML=`
     <div class="result-grid">
-      <div class="res-item ${isLong?'long':'short'}"><div class="res-item-label">Entry</div><div class="res-item-value">${smartFormat(entry)}</div></div>
-      <div class="res-item ${isLong?'long':'short'}"><div class="res-item-label">Stop Loss</div><div class="res-item-value">${smartFormat(sl)}</div></div>
-      ${tp?`<div class="res-item ${isLong?'long':'short'}"><div class="res-item-label">Take Profit</div><div class="res-item-value">${smartFormat(tp)}</div></div>`:''}
-      <div class="res-item"><div class="res-item-label">Leverage</div><div class="res-item-value">${lev}x</div></div>
-      <div class="res-item"><div class="res-item-label">Position Value</div><div class="res-item-value">$${smartFormat(posValue, 0)}</div></div>
-      <div class="res-item"><div class="res-item-label">Margin</div><div class="res-item-value">$${smartFormat(margin, 2)}</div></div>
-      <div class="res-item"><div class="res-item-label">Risk $</div><div class="res-item-value">$${smartFormat(riskAmt, 2)}</div></div>
-      <div class="res-item"><div class="res-item-label">Risk/Margin</div><div class="res-item-value ${riskStyle}">${riskPct}%</div></div>
-      <div class="res-item"><div class="res-item-label">Liq Price</div><div class="res-item-value">${smartFormat(liq)}</div></div>
+      <div class="res-item ${long?'long':'short'}"><div class="res-item-label">Entry</div><div class="res-item-value">${f(e)}</div></div>
+      <div class="res-item ${long?'long':'short'}"><div class="res-item-label">Stop Loss</div><div class="res-item-value">${f(sp)}</div></div>
+      ${tp?`<div class="res-item ${long?'long':'short'}"><div class="res-item-label">Take Profit</div><div class="res-item-value">${f(tp)}</div></div>`:''}
+      <div class="res-item"><div class="res-item-label">Lev</div><div class="res-item-value">${l}x</div></div>
+      <div class="res-item highlight"><div class="res-item-label">Pos Value</div><div class="res-item-value">$${f(pv,0)}</div></div>
+      <div class="res-item highlight"><div class="res-item-label">Margin</div><div class="res-item-value">$${f(m,2)}</div></div>
+      <div class="res-item"><div class="res-item-label">Risk $</div><div class="res-item-value">$${f(r,2)}</div></div>
+      <div class="res-item ${isHighRisk?'risk-high':''}"><div class="res-item-label">Risk/Margin</div><div class="res-item-value">${pct}%</div></div>
+      <div class="res-item"><div class="res-item-label">Liq</div><div class="res-item-value">${f(liq)}</div></div>
       <div class="res-item"><div class="res-item-label">R:R</div><div class="res-item-value">1:${rr||'—'}</div></div>
     </div>`;
 }
 
-// === Các hàm SAVE / LOAD / DELETE giữ nguyên ===
-function savePosition(){
-  if(!+$('e').value || !+$('sp').value){ alert('Vui lòng nhập Entry và Stop Loss'); return; }
-  const name = generatePositionName();
-  if(getPositions().some(p=>p.name===name)){
-    if(!confirm(`"${name}" đã tồn tại. Ghi đè?`)) return;
-  }
-  const pos = {name, acc:$('acc').value, riskMode, rp:$('rp').value, ra:$('ra').value,
-               e:$('e').value, sp:$('sp').value, tpMode, tpInput:$('tpInput').value,
-               lev:$('lev').value, ts:Date.now()};
-  let list = getPositions();
-  const idx = list.findIndex(p=>p.name===name);
-  if(idx>-1) list[idx]=pos; else list.push(pos);
-  savePositions(list); loadSavedPositions();
-  alert(`Đã lưu: ${name}`);
-}
+function savePosition(){if(!+$('e').value||!+$('sp').value)return alert('Nhập Entry + SL');const n=name(),list=get(),i=list.findIndex(p=>p.name===n);if(i>-1&&!confirm(n+' đã tồn tại. Ghi đè?'))return;const p={name:n,acc:$('acc').value,riskMode,rp:$('rp').value,ra:$('ra').value,e:$('e').value,sp:$('sp').value,tpMode,tpInput:$('tpInput').value,lev:$('lev').value,ts:Date.now()};i>-1?list[i]=p:list.push(p);localStorage.setItem('p',JSON.stringify(list));loadSaved();alert('Đã lưu: '+n)}
+function get(){try{return JSON.parse(localStorage.getItem('p')||'[]')}catch(e){return[]}}
+function loadSaved(){const l=get().sort((a,b)=>b.ts-a.ts);$('savedCount').textContent=l.length;const el=$('savedList');if(!l.length){el.innerHTML='<div style="text-align:center;padding:20px;color:#555">Chưa có vị thế</div>';return}el.innerHTML=l.map((p,i)=>`<div class="saved-item"><div><div class="saved-name">${p.name}</div><div style="font-size:10px;color:#888">${new Date(p.ts).toLocaleString('vi').slice(0,17)}</div></div><div style="font-size:11px;color:#aaa">${+p.sp<+p.e?'LONG':'SHORT'} @ ${p.e} • ${p.lev}x</div><div class="saved-actions"><button onclick="loadPos(${i})">↻</button><button onclick="del(${i})">×</button></div></div>`).join('')}
+function loadPos(i){const p=get().sort((a,b)=>b.ts-a.ts)[i];if(!p)return;$('acc').value=p.acc;riskMode=p.riskMode;$('rp').value=p.rp;$('ra').value=p.ra;$('e').value=p.e;$('sp').value=p.sp;tpMode=p.tpMode;$('tpInput').value=p.tpInput;$('lev').value=p.lev;updateToggles();$('levVal').textContent=p.lev+'x';document.querySelectorAll('.lev-preset').forEach(b=>b.classList.toggle('active',b.dataset.lev==p.lev));calc();saveState();scrollTo(0,0)}
+function del(i){if(!confirm('Xóa?'))return;let l=get().sort((a,b)=>b.ts-a.ts);l.splice(i,1);localStorage.setItem('p',JSON.stringify(l));loadSaved()}
+function clearForm(){if(confirm('Xóa hết dữ liệu hiện tại?')){localStorage.removeItem('s');location.reload()}}
 
-function getPositions(){ try{return JSON.parse(localStorage.getItem('savedPositions'))||[]}catch(e){return[]} }
-function savePositions(p){ localStorage.setItem('savedPositions', JSON.stringify(p)); }
-
-function loadSavedPositions(){
-  const list = getPositions().sort((a,b)=>b.ts-a.ts);
-  $('savedCount').textContent = list.length;
-  const el = $('savedList');
-  if(!list.length){ el.innerHTML='<div style="text-align:center;padding:40px;color:#555">Chưa có vị thế nào được lưu</div>'; return; }
-  el.innerHTML = list.map((p,i)=>{
-    const long = +p.sp < +p.e;
-    return `<div class="saved-item" id="pos-${i}">
-      <div><div class="saved-name">${p.name}</div><div style="font-size:11px;color:#888;margin-top:4px">${new Date(p.ts).toLocaleString()}</div></div>
-      <div class="saved-info">${long?'LONG':'SHORT'} @ ${p.e} • ${p.lev}x</div>
-      <div class="saved-actions"><button onclick="loadPosition(${i})">⟲</button><button onclick="deletePosition(${i})">🗑</button></div>
-    </div>`;
-  }).join('');
-}
-
-function loadPosition(i){
-  const list = getPositions().sort((a,b)=>b.ts-a.ts);
-  const p = list[i]; if(!p) return;
-  $('acc').value=p.acc; riskMode=p.riskMode; $('rp').value=p.rp; $('ra').value=p.ra;
-  $('e').value=p.e; $('sp').value=p.sp; tpMode=p.tpMode; $('tpInput').value=p.tpInput; $('lev').value=p.lev;
-  updateToggles(); $('levVal').textContent=p.lev+'x';
-  document.querySelectorAll('.lev-preset').forEach(b=>b.classList.toggle('active',b.dataset.lev==p.lev));
-  calc(); saveCurrentState();
-  window.scrollTo(0,0);
-}
-
-function deletePosition(i){
-  if(!confirm('Xóa vị thế này?')) return;
-  let list = getPositions().sort((a,b)=>b.ts-a.ts);
-  list.splice(i,1); savePositions(list); loadSavedPositions();
-}
-
-function clearForm(){
-  if(!confirm('Xóa toàn bộ dữ liệu hiện tại?')) return;
-  localStorage.removeItem('lastCalcState');
-  $('acc').value='1000'; riskMode='p'; $('rp').value='1'; $('ra').value='15';
-  $('e').value=''; $('sp').value=''; tpMode='rr'; $('tpInput').value='2'; $('lev').value='20';
-  updateToggles(); $('levVal').textContent='20x';
-  document.querySelectorAll('.lev-preset').forEach(b=>b.classList.toggle('active',b.dataset.lev=='20'));
-  calc();
-}
-
-// KHỞI ĐỘNG
-loadLastState() || calc();
-loadSavedPositions();
-updateToggles();
-
-document.querySelectorAll('input').forEach(el=>el.addEventListener('input',()=>setTimeout(()=>{calc();saveCurrentState();},50)));
+loadState()||calc();loadSaved();updateToggles();
+document.querySelectorAll('input').forEach(el=>el.addEventListener('input',()=>setTimeout(()=>{calc();saveState()},50)));
 </script>
-
 </body>
 </html>
