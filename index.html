@@ -178,7 +178,7 @@ function calc(){
   let tp=0,rr=0;
   if(t>0){if(tpMode==='rr'){rr=t;tp=long?e+d*rr:e-d*rr}else{tp=t;rr=((long?(tp-e):(e-tp))*sz/r).toFixed(2)}}
   const pct=m?(r/m*100).toFixed(1):0;
-  const isHighRisk = pct >= 90;
+  const isHighRisk = pct >= 80;
   $('directionBadge').className='badge '+(long?'long-bg':'short-bg');$('directionBadge').textContent=long?'LONG':'SHORT';
   const posClass = long ? 'long' : 'short'; // Class chung cho vị thế
 
